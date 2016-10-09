@@ -2,6 +2,7 @@ from permutations import num_permutations, rank
 from collections import Counter
 from math import factorial
 from functools import reduce
+import itertools
 
 def unit_test():
     unit_test_num_permutations()
@@ -25,4 +26,8 @@ def unit_test_num_permutations():
 
 def unit_test_rank():
     for i, word in enumerate(['abc', 'acb', 'bac', 'bca', 'cab', 'cba']):
+        assert rank(word) == i
+    for i, word in enumerate(sorted(set(itertools.permutations('aabc')))):
+        assert rank(word) == i
+    for i, word in enumerate(sorted(set(itertools.permutations('abbbdjdc')))):
         assert rank(word) == i
