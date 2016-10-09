@@ -32,33 +32,6 @@ def rank(word):
             ordered.remove(char)
     return num_before
 
-
-def __unit_test():
-    __unit_test_num_permutations()
-    __unit_test_rank()
-    return "unit_tests pass"
-
-def __unit_test_num_permutations():
-    for word in '', 'a', 'aa', 'aaa':
-        assert num_permutations(word) == 1
-    for word in 'ab', 'ba', 'cb', 'xy':
-        assert num_permutations(word) == 2
-
-    from math import factorial
-    for word in 'abc', 'abcdef', 'xyab', 'xyabzeoijk':
-        assert num_permutations(word) == factorial(len(word))
-
-    from functools import reduce
-    for word in 'aababab', 'aba', 'acejadfjdjafj', 'jfkskdfjdkkjjjj':
-        perms = reduce(lambda total, count: total / factorial(count),
-                       Counter(word).values(),
-                       factorial(len(word)))
-        assert num_permutations(word) == perms
-
-def __unit_test_rank():
-    for i, word in enumerate(['abc', 'acb', 'bac', 'bca', 'cab', 'cba']):
-        assert rank(word) == i
-
-
 if __name__ == "__main__":
-    print(__unit_test())
+    from test_permutations import unit_test
+    print(unit_test())
