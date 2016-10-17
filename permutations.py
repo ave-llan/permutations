@@ -32,6 +32,35 @@ def rank(word):
             ordered.remove(char)
     return num_before
 
+def ith_permutation(i, word):
+    """Find the i-th lexographic permutation of a word."""
+    permutations = num_permutations(word)
+    counts = Counter(word)
+    ordered = sorted(counts.keys())
+    len_word = len(word)
+    rotations_remaining = i % permutations
+    built_permutation = []
+
+    def permutations_without_char(len_word, char):
+        return permutations * counts[char] / len_word
+
+    while rotations_remaining:
+        for char in ordered:
+            perms_without_char = permutations_without_char(len_word, char)
+            if rotations_remaining and perms_without_char <= rotations_remaining:
+                rotations_remaining -= perms_without_char
+            else:
+                built_permutation.append(char)
+                permutations = perms_without_char
+                len_word -= 1
+                counts[char] -= 1
+                if not counts[char]:
+                    ordered.pop(ordered.index(char))
+                break
+    built_permutation.append(''.join(sorted(counts.elements())))
+    return ''.join(built_permutation)
+
+
 def permute(word):
     """Create an iterator with all permutations of given word."""
     if len(word) <= 1:
