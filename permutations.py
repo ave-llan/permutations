@@ -32,6 +32,13 @@ def rank(word):
             ordered.remove(char)
     return num_before
 
+def permute(word):
+    """Create an iterator with all permutations of given word."""
+    if len(word) <= 1:
+        return [word]
+    return (char + suffix for i, char in enumerate(word)
+            for suffix in permute(word[:i] + word[i+1:]))
+
 if __name__ == "__main__":
     from test_permutations import unit_test
     print(unit_test())
