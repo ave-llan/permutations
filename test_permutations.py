@@ -37,6 +37,10 @@ def unit_test_rank():
 def unit_test_permutations():
     assert sorted(permute('j')) == ['j']
     assert sorted(permute('dog')) == sorted(['dog', 'dgo', 'odg', 'ogd', 'god', 'gdo'])
+    assert sorted(permute('aabc')) == sorted([
+        'aabc', 'aacb', 'abac', 'abca', 'acab', 'acba', 
+        'baac', 'baca', 'bcaa', 'caab', 'caba', 'cbaa'])
+    assert [w for w in permute('bac')] == ['bac', 'bca', 'abc', 'acb', 'cba', 'cab']
 
 def unit_test_ith_permutation():
     assert ith_permutation(0, 'abc') == 'abc'

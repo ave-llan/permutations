@@ -65,7 +65,14 @@ def permute(word):
     """Create an iterator with all permutations of given word."""
     if len(word) <= 1:
         return [word]
-    return (char + suffix for i, char in enumerate(word)
+
+    leader_indices, used = [], set()
+    for i, char in enumerate(word):
+        if char not in used:
+            leader_indices.append(i)
+            used.add(char)
+            
+    return (word[i] + suffix for i in leader_indices
             for suffix in permute(word[:i] + word[i+1:]))
 
 if __name__ == "__main__":
