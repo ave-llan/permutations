@@ -1,4 +1,4 @@
-from permutations import num_permutations, rank, permute, ith_permutation
+from permutations import num_permutations, rank, permute, ith_permutation, next_permutation
 from collections import Counter
 from math import factorial
 from functools import reduce
@@ -9,6 +9,7 @@ def unit_test():
     unit_test_rank()
     unit_test_permutations()
     unit_test_ith_permutation()
+    unit_test_next_permutation()
     return "unit_tests pass"
 
 def unit_test_num_permutations():
@@ -41,6 +42,17 @@ def unit_test_permutations():
         'aabc', 'aacb', 'abac', 'abca', 'acab', 'acba', 
         'baac', 'baca', 'bcaa', 'caab', 'caba', 'cbaa'])
     assert [w for w in permute('bac')] == ['bac', 'bca', 'abc', 'acb', 'cba', 'cab']
+
+def unit_test_next_permutation():
+    assert next_permutation('') == ''
+    assert next_permutation('a') == 'a'
+    assert next_permutation('aaa') == 'aaa'
+    assert next_permutation('aba') == 'baa'
+    assert next_permutation('word') == 'wrdo'
+    assert next_permutation('wrdo') == 'wrod'
+    assert next_permutation('wrod') == 'dorw'
+    assert next_permutation('abaaacb') == 'abaabac'
+    assert next_permutation('abzzzzcb') == 'acbbzzzz'
 
 def unit_test_ith_permutation():
     assert ith_permutation(0, 'abc') == 'abc'
