@@ -75,6 +75,21 @@ def permute(word):
     return (word[i] + suffix for i in leader_indices
             for suffix in permute(word[:i] + word[i+1:]))
 
+def next_permutation(word):
+    """Return the next lexographic permutation of a word."""
+    # 1. find first char not ascending
+    word = list(word)
+    i = len(word) - 1
+    while i > 0 and word[i - 1] >= word[i]:
+        i -= 1
+    if i > 0:
+        j = len(word) - 1
+        while word[j] <= word[i - 1]:
+            j -= 1
+        word[i - 1], word[j] = word[j], word[i - 1]
+    return ''.join(word[:i] + word[i:][::-1])
+
+
 if __name__ == "__main__":
     from test_permutations import unit_test
     print(unit_test())
